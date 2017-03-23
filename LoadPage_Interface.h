@@ -9,7 +9,7 @@ public:
 	~LoadPage_Interface();
 	
 private:
-
+	//a
 	void set_parameter(char *type, char *value);
 };
 
