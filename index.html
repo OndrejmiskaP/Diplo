@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html onmousemove="showCoords(event)" onclick="showCoords(event)">
+
+
+<style>
+input[type="submit"]{ /* 16.3.2017 9:40 */ background-color: #555; color: #fff; width: 60px; } 
+input[type="s_type"]{ background-color: #8b008b; color: #fff; width: 50px; text-align:left;} 
+input[type="s_aktual"]{ background-color:#00bfff; color: #fff; width: 40px;text-align:center; } 
+input[type="s_arch1"]{ background-color: #ff0000; color: #fff; width: 40px;text-align:center; } 
+input[type="s_arch2"]{ background-color: #ffff00; color: #000; width: 40px;text-align:center; } 
+input[type="s_arch3"]{ background-color: #0000ff; color: #fff; width: 40px;text-align:center; } 
+input[type="s_arch4"]{ background-color: #008000; color: #fff; width: 40px;text-align:center; } 
+input[type="s_min_max"]{ background-color: #a9a9a9; color: #fff; width: 40px;text-align:center; }
+</style>
+
+
+<meta http-equiv="refresh" content="2">
+
+<body>
+<script>  
+var sensor_type = [];
+var sensor_value = [];
+
+//DATA******
+sensor_type[0] = "tlak31  ";
+var data_arch0= [81.9    ,-5.124  ,58      ,5.124   ,5811    ,544     ,81.9    ,81.9    ,81.9    ,81.9    ,81.9    ,81.9    ,81.9    ,-5.124  ,58      ,5.124   ,5811    ,544     ,81.9    ,81.9    ,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000];
+sensor_type[1] = "zapor di";
+var data_arch1= [111.33  ,111.33  ,111.33  ,111.33  ,111.33  ,111.33  ,111.33  ,111.33  ,111.33  ,111.33  ,111.33  ,-1.33   ,111.33  ,111.33  ,111.33  ,111.33  ,111.33  ,111.33  ,111.33  ,111.33  ,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000];
+sensor_type[2] = "zrychl  ";
+var data_arch2= [5879    ,5879    ,5879    ,5879    ,5879    ,5879    ,5879    ,5879    ,59      ,5879    ,5879    ,59      ,5879    ,5879    ,5879    ,5879    ,5879    ,5879    ,5879    ,5879    ,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000];
+sensor_type[3] = "teplota7";
+var data_arch3= [00000000,2445    ,2445    ,2445    ,2441    ,2441    ,2441    ,2448    ,2454    ,2450    ,2448    ,2449    ,2449    ,2445    ,2445    ,2445    ,2441    ,2441    ,2441    ,2448    ,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000];
+sensor_type[4] = "teplota ";
+var data_arch4= [00000000,2421    ,2421    ,245     ,245     ,24.44   ,24.44   ,12.44   ,124.44  ,-4.44   ,-40258  ,214.44  ,214.44  ,2421    ,2421    ,245     ,245     ,24.44   ,24.44   ,12.44   ,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000];
+sensor_type[5] = "tlak110 ";
+var data_arch5= [00000000,00000000,5874    ,5874    ,5874    ,5874    ,-744    ,-7      ,44      ,-44     ,5874    ,-4      ,-4      ,-4      ,5874    ,5874    ,5874    ,5874    ,-744    ,-7      ,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000];
+sensor_type[6] = "tlak7   ";
+var data_arch6= [00000000,00000000,00000000,00000000,00000000,522     ,5822    ,5822    ,5822    ,5822    ,522     ,522     ,522     ,522     ,522     ,522     ,522     ,522     ,5822    ,5822    ,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000];
+sensor_type[7] = "zrychle ";
+var data_arch7= [00000000,00000000,00000000,00000000,00000000,58.788  ,5.87679 ,5.87679 ,5.87679 ,5.87679 ,5.87679 ,5.87679 ,5.87679 ,5.87679 ,5.87679 ,5.87679 ,5.87679 ,58.788  ,5.87679 ,5.87679 ,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000];
+sensor_type[8] = "tlak10  ";
+var data_arch8= [00000000,00000000,00000000,00000000,00000000,5111    ,5111    ,5111    ,5111    ,5111    ,5111    ,5111    ,5111    ,5111    ,5111    ,5111    ,5111    ,5111    ,5111    ,5111    ,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000];
+sensor_type[9] = "zrych   ";
+var data_arch9= [00000000,00000000,00000000,00000000,00000000,00000000,5.879   ,5.879   ,5.879   ,5.879   ,5.879   ,5.879   ,5.879   ,5.879   ,5.879   ,5.879   ,5.879   ,5.879   ,5.879   ,5.879   ,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000];
+sensor_type[10] = "teplota3";
+var data_arch10= [00000000,00000000,00000000,00000000,00000000,00000000,2445    ,2445    ,25      ,-25     ,-25     ,24      ,24      ,24      ,24      ,24      ,24      ,24      ,2445    ,2445    ,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000];
+sensor_type[11] = "tlak40  ";
+var data_arch11= [00000000,00000000,00000000,00000000,00000000,00000000,25.34   ,25.34   ,25.34   ,5.124   ,5.124   ,5.124   ,5.124   ,5.124   ,5.124   ,5.124   ,5.124   ,5.124   ,25.34   ,25.34   ,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000];
+sensor_type[12] = "teplota1";
+var data_arch12= [00000000,00000000,00000000,00000000,00000000,00000000,24421   ,24421   ,24421   ,-4421   ,-4421   ,-4421   ,-4421   ,-4421   ,-4421   ,-4421   ,-4421   ,-4421   ,24421   ,24421   ,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000];
+sensor_type[13] = "dife    ";
+var data_arch13= [00000000,00000000,00000000,00000000,00000000,00000000,-0.123  ,-1.23   ,1.23    ,-123    ,-123    ,-23     ,-23     ,-23     ,-23     ,-23     ,-23     ,-23     ,-0.123  ,-1.23   ,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000];
+sensor_type[14] = "zrychlen";
+var data_arch14= [00000000,00000000,00000000,00000000,00000000,00000000,-1.768  ,58.768  ,58.768  ,58.768  ,58.768  ,-8.768  ,-8.768  ,-8.768  ,-8.768  ,-8.768  ,-8.768  ,-8.768  ,-1.768  ,58.768  ,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000];
+sensor_type[15] = "tlak4   ";
+var data_arch15= [00000000,00000000,00000000,00000000,00000000,00000000,00000000,281.9   ,81.9    ,-25.34  ,-5.124  ,25.34   ,25.34   ,25.34   ,25.34   ,25.34   ,25.34   ,25.34   ,25.34   ,281.9   ,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000];
+//KON************
+
+var data_arch = [data_arch0,data_arch1,data_arch2,data_arch3,data_arch4,data_arch5,data_arch6,data_arch7,data_arch8,data_arch9,data_arch10,data_arch11,data_arch12,data_arch13,data_arch14,data_arch15];
+
+var cX,cY;
+var x = [],x_stare =[];  
+var sensor_down=[];
+var sensor_up=[];
+var stvorica = 1;
+var asirka = screen.availWidth;
+var avyska = screen.availHeight;
+
+</script>
+
+<BODY BGCOLOR="#ffffff">
+
+<canvas id="platno">   
+   Vas prehliadac nepodporuje tag canvas.
+</canvas>
+
+<br> <input type="s_type" id="menu" value="velicina">  <input type="s_min_max" id="menu"  value="minim"> <input type="s_min_max" id="menu"  value="maxim"> <input type="s_aktual"  id="menu"   value="aktual"> <input type="s_arch1"  id="menu"   value="archiv">
+<input type="s_type"  id="menu"   value="sensor">  <input type="s_min_max"  id="menu"  value="minim"> <input type="s_min_max"  id="menu"  value="maxim"> <input type="s_aktual" id="menu"   value="aktual"> <input type="s_arch2"  id="menu"   value="archiv"> 
+<input type="s_type"  id="menu"   value="sensor">  <input type="s_min_max"  id="menu"  value="minim"> <input  type="s_min_max" id="menu"  value="maxim"> <input type="s_aktual" id="menu"   value="aktual"> <input type="s_arch3"  id="menu"   value="archiv"> 
+<input  type="s_type"  id="menu"   value="sensor">  <input  type="s_min_max" id="menu"  value="minim"> <input  type="s_min_max"  id="menu"  value="maxim"> <input type="s_aktual" id="menu"   value="aktual"> <input type="s_arch4"  id="menu"   value="archiv">  <input type="s_aktual" id="poloha_x"  > <input type="s_aktual" id="poloha_y"  >  
+
+<br> <input type="s_type"  id="sens1_type"  >  <input  type="s_min_max"   id="sens1_down" > <input type="s_min_max"  id="sens1_up" > <input  type="s_aktual" id="sens1_value" > <input  type="s_arch1" id="sens1_arch"> 
+ <input type="s_type"  id="sens2_type"  >  <input  type="s_min_max"  id="sens2_down" > <input  type="s_min_max" id="sens2_up" > <input type="s_aktual" id="sens2_value"  > <input  type="s_arch2" id="sens2_arch"> 
+ <input  type="s_type"  id="sens3_type"  >  <input type="s_min_max"  id="sens3_down" > <input type="s_min_max"  id="sens3_up" > <input type="s_aktual" id="sens3_value"  > <input  type="s_arch3" id="sens3_arch"> 
+ <input type="s_type"  id="sens4_type"  >  <input type="s_min_max"  id="sens4_down" > <input type="s_min_max"  id="sens4_up" > <input type="s_aktual" id="sens4_value"  > <input  type="s_arch4" id="sens4_arch"> <input type="button" id="myBtn1" onclick="mygr1()" value="graf"> <input  type="s_aktual" id="ind_x">  
+  
+<br> <input type="s_type" id="sens5_type"  >  <input type="s_min_max"  id="sens5_down" > <input type="s_min_max"  id="sens5_up" > <input type="s_aktual" id="sens5_value"  > <input  type="s_arch1" id="sens5_arch"> 
+ <input type="s_type"  id="sens6_type"  >  <input type="s_min_max"  id="sens6_down" > <input type="s_min_max"  id="sens6_up" > <input type="s_aktual"  id="sens6_value"  > <input  type="s_arch2" id="sens6_arch"> 
+ <input type="s_type"  id="sens7_type"  >  <input type="s_min_max"  id="sens7_down" > <input type="s_min_max"  id="sens7_up" > <input type="s_aktual" id="sens7_value"  > <input  type="s_arch3" id="sens7_arch"> 
+ <input type="s_type"  id="sens8_type"  >  <input type="s_min_max"  id="sens8_down" > <input type="s_min_max"  id="sens8_up" > <input type="s_aktual" id="sens8_value"  > <input  type="s_arch4" id="sens8_arch"> <input type="button" id="myBtn2" onclick="mygr2()" value="graf">
+
+<br> <input  type="s_type" id="sens9_type"  >  <input type="s_min_max"  id="sens9_down" > <input type="s_min_max"  id="sens9_up" > <input type="s_aktual" id="sens9_value"  > <input  type="s_arch1" id="sens9_arch"> 
+ <input type="s_type"  id="sens10_type"  >  <input type="s_min_max"  id="sens10_down" > <input type="s_min_max"  id="sens10_up" > <input type="s_aktual" id="sens10_value"  > <input  type="s_arch2" id="sens10_arch">  
+ <input type="s_type"  id="sens11_type"  >  <input type="s_min_max"  id="sens11_down" > <input type="s_min_max"  id="sens11_up" > <input type="s_aktual" id="sens11_value"  > <input  type="s_arch3" id="sens11_arch"> 
+ <input type="s_type"  id="sens12_type"  >  <input type="s_min_max"  id="sens12_down" > <input type="s_min_max"  id="sens12_up" > <input type="s_aktual"  id="sens12_value"  > <input  type="s_arch4" id="sens12_arch"> <input type="button" id="myBtn3" onclick="mygr3()" value="graf">
+
+<br> <input type="s_type"  id="sens13_type"  >  <input type="s_min_max"  id="sens13_down" > <input type="s_min_max"  id="sens13_up" > <input type="s_aktual" id="sens13_value"  > <input  type="s_arch1" id="sens13_arch"> 
+ <input type="s_type"  id="sens14_type"  >  <input type="s_min_max"  id="sens14_down" > <input type="s_min_max"  id="sens14_up" > <input type="s_aktual" id="sens14_value"  > <input  type="s_arch2" id="sens14_arch">  
+ <input type="s_type"  id="sens15_type"  >  <input type="s_min_max"  id="sens15_down" > <input type="s_min_max"  id="sens15_up" > <input type="s_aktual" id="sens15_value"  > <input  type="s_arch3" id="sens15_arch"> 
+ <input type="s_type"  id="sens16_type"  >  <input type="s_min_max"  id="sens16_down" > <input type="s_min_max"  id="sens16_up" > <input type="s_aktual" id="sens16_value"  > <input  type="s_arch4" id="sens16_arch"> <input type="button" id="myBtn4" onclick="mygr4()" value="graf"> <INPUT TYPE="button"  onClick="history.go(0)" VALUE="Refresh">
+
+<script>
+
+// Najdeme náš canvas element
+var canvas = document.getElementById("platno");
+// Získáme kontext plátna
+var context = canvas.getContext("2d");
+
+//document.getElementById("platno").width= 1540;   // 1540x620
+//document.getElementById("platno").height= 620;
+canvas.width= asirka-40;   
+canvas.height= avyska-250;
+
+mriezka_ramik();
+ 
+
+
+myGraf1();
+
+
+// koniec programu*********************************
+
+function myGraf1() 
+{
+var i;
+max_min();
+var strr;
+for (i = 1; i <= 16; i++) {
+strr = "sens"+i+"_value";
+document.getElementById(strr).value=data_arch[i-1][99];
+strr= "sens"+i+"_type";
+document.getElementById(strr).value= sensor_type[i-1];
+strr= "sens"+i+"_down";
+document.getElementById(strr).value= sensor_down[i-1];
+strr= "sens"+i+"_up";
+document.getElementById(strr).value= sensor_up[i-1];
+      }
+
+var krok_x = (canvas.width-34)/100.0;
+for (var i = 4*(stvorica-1); i < 4*stvorica; i++) {
+
+
+//context.lineWidth = 3;
+//context.beginPath();
+//context.moveTo(10,(canvas.height-20+posun)-x_stare[i]*data_arch[i][0]);
+//for (var j = 1; j < 100; j++) {context.lineTo(10+j*krok_x, (canvas.height-20+posun)-x_stare[i]*data_arch[i][j]);  } 
+//context.strokeStyle = "#ffffff";   //farba grafu
+//context.stroke(); //!!!!!!!!!!!
+
+x[i] = (canvas.height-30.0)/(1.0*sensor_up[i]-1.0*sensor_down[i]); 
+var posun = (canvas.height-30.0)*(sensor_down[i]/(1.0*sensor_up[i]-1.0*sensor_down[i])); //tiez uchovAT A ULOZIT STARE A NOVE !!!!!
+
+context.lineWidth = 1;
+context.beginPath();
+context.moveTo(10,(canvas.height-20+posun)-x[i]*data_arch[i][0]);
+for (j=1; j < 100; j++) {context.lineTo(10+j*krok_x, (canvas.height-20+posun)-x[i]*data_arch[i][j]);  } 
+var farba_grafu;
+if(i==0 || i==4 || i==8|| i==12) farba_grafu = 'red '; 
+if(i==1 || i==5 || i==9|| i==13) farba_grafu = '#f2e714'; 
+if(i==2 || i==6 || i==10|| i==14) farba_grafu = 'blue'; 
+if(i==3 || i==7 || i==11|| i==15) farba_grafu = 'green'; 
+  
+context.strokeStyle = farba_grafu;   //farba grafu
+context.stroke(); 
+//x_stare[i]=x[i];
+              }
+
+mriezka_ramik();
+
+}   // koniec myGraf1
+
+
+function mriezka_ramik()
+{
+ky=(canvas.height-30)/10;
+kx=(canvas.width-40)/50;
+
+context.lineWidth = 1;   
+context.beginPath();
+for(var x = 7; x < canvas.width-20; x += kx){
+        context.moveTo(x, 10);
+        context.lineTo(x, canvas.height-20);
+}
+for(var y = 0; y < canvas.height; y += ky){
+        context.moveTo(7, 10 + y);
+        context.lineTo(canvas.width-30, 10 + y);      
+}
+
+context.strokeStyle = 'grey';
+context.closePath();
+context.stroke();
+
+//ramik
+context.lineWidth = 3;
+context.beginPath();
+context.moveTo(7,10);
+context.lineTo(7, canvas.height-20);
+context.lineTo(canvas.width-33,canvas.height-20);
+context.lineTo(canvas.width-33, 10);
+context.strokeStyle = '#000000';
+context.closePath();
+context.stroke();
+
+//popis mierky
+context.font = "15px Arial";
+for(var i = 10; i >= 0; i--){
+context.fillText(100-i*10,canvas.width-25,15+ky*i); 
+   }
+
+context.font = "15px Arial";
+for(var i = 0; i <= 25; i++){
+context.fillText(Math.round(i*100.0/25.0),2*kx*i,canvas.height-2);    
+   }
+
+}  // koniec funkcie mriezka_ramik
+
+
+
+function max_min()
+{
+for(var j = 0; j < 16; j++){
+sensor_down[j]= data_arch[j][0];
+sensor_up[j]= data_arch[j][0];
+for (var i = 1; i < 100; i++) {
+  if(data_arch[j][i]<sensor_down[j]) sensor_down[j] = data_arch[j][i];
+  if(data_arch[j][i]>sensor_up[j]) sensor_up[j] = data_arch[j][i]; 
+   } 
+ //window.alert("sensor_down="+sensor_down[j]+" sensor_up=" + sensor_up[j]);
+
+   }
+}
+
+function showCoords(event){
+
+context.lineWidth = 2;
+context.beginPath();
+context.moveTo(cX-7,10);
+context.lineTo(cX-7,canvas.height-20);
+context.strokeStyle = '#ffffff';
+context.closePath();
+context.stroke();
+
+myGraf1();
+
+cX = event.clientX;
+cY = event.clientY;
+document.getElementById("poloha_x").value= cX;  
+document.getElementById("poloha_y").value= cY;
+if(cY < canvas.height ){
+var ind_x = Math.round((1.0*cX)/((canvas.width-40)/100.0))-1;
+//window.alert("cX="+cX+" cY="+cY+" index="+ind_x);
+
+
+var strr;
+//for (var i = 4*(stvorica-1)+1; i <= 4*stvorica; i++) {
+for (var i = 1; i <= 16; i++) {
+strr = "sens"+i+"_arch";
+document.getElementById(strr).value = data_arch[i-1][ind_x]; }
+ 
+document.getElementById("ind_x").value= ind_x;
+ 
+//var coords1 = "client - X: " + cX + ", Y coords: " + cY;
+// window.alert("poloha mysi="+coords1);
+
+//window.alert("cX="+cX+" cY="+cY);
+context.lineWidth = 2;
+context.beginPath();
+context.moveTo(cX-7,10);
+context.lineTo(cX-7,canvas.height-20);
+context.strokeStyle = '#000000';
+context.closePath();
+context.stroke();
+
+  }
+}
+ 
+function mygr1(){
+stvorica=1;
+document.getElementById("myBtn1").value = "aktiv";
+document.getElementById("myBtn2").value = "graf";
+document.getElementById("myBtn3").value = "graf";
+document.getElementById("myBtn4").value = "graf"; 
+window.stop();
+context.clearRect(0, 0, canvas.width, canvas.height);
+context.stroke(); 
+myGraf1();
+}
+
+
+function mygr2(){
+stvorica=2;
+document.getElementById("myBtn2").value = "aktiv";
+document.getElementById("myBtn1").value = "graf";
+document.getElementById("myBtn3").value = "graf";
+document.getElementById("myBtn4").value = "graf";
+window.stop();
+context.clearRect(0, 0, canvas.width, canvas.height);
+context.stroke(); 
+myGraf1();
+}
+
+
+function mygr3(){
+stvorica=3;
+document.getElementById("myBtn3").value = "aktiv";
+document.getElementById("myBtn2").value = "graf";
+document.getElementById("myBtn1").value = "graf";
+document.getElementById("myBtn4").value = "graf";
+window.stop();
+context.clearRect(0, 0, canvas.width, canvas.height);
+context.stroke(); 
+myGraf1();
+}
+
+
+function mygr4(){
+stvorica=4;
+document.getElementById("myBtn4").value = "aktiv";
+document.getElementById("myBtn2").value = "graf";
+document.getElementById("myBtn3").value = "graf";
+document.getElementById("myBtn1").value = "graf";
+window.stop();
+context.clearRect(0, 0, canvas.width, canvas.height);
+context.stroke(); 
+myGraf1();
+}
+
+</script>
+
+</body>
+
+</html>
